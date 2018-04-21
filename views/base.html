@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="./public/css/milligram.min.css" />
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+    <style>
+        body{
+            padding-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div>
+    <div class="container">
+
+        <div class="row">
+            <div class="column">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

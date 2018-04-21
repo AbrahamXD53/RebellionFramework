@@ -1,0 +1,18 @@
+
+order allow,deny
+<Files ~ "\.(js|jpg|png|gif|css)$">
+   allow from all
+</Files>
+
+RewriteEngine On
+
+    # Redirect Trailing Slashes If Not A Folder...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ ../index.php [L]
+
+# Handle Front Controller...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ %1 [L,R=301]
+    
