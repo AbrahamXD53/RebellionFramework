@@ -43,7 +43,7 @@ class Paginate
             $sql);
     }
 
-    public function paginate(Connection $connection, $fetchMode, $params = array())
+    public function paginate(Connection $connection, $fetchMode, $params = [])
     {
         try {
             $stmt = $connection->pdo->prepare($this->sql);

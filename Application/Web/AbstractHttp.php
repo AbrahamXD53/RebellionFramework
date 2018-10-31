@@ -24,7 +24,7 @@ class AbstractHttp
     protected $cookies; // cookies
     protected $metaData; // information about the transmission
     protected $transport; // i.e. http or https
-    protected $data = array();
+    protected $data = [];
 
     // special requirements
 	public function setUri($uri, array $params = NULL)
@@ -92,6 +92,10 @@ class AbstractHttp
 	public function getData()
 	{
 		return $this->data ?? NULL;
+	}
+	public function getDataAsObj()
+	{
+		return json_decode(\json_encode( $this->getData()));
 	}
 	public function getTransport()
 	{

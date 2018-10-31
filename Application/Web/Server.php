@@ -12,27 +12,36 @@ class Server
     {
         $data=file_get_contents('php://input');
         self::$request = new Request();
-        $getPost = $_REQUEST ?? array();
+        $getPost = $_REQUEST ?? [];
         $jsonData = json_decode($data, true);
-        $jsonData = $jsonData ?? array();
+        $jsonData = $jsonData ?? [];
         if(empty($jsonData) and $data){
             self::$request->setRawData($data);
         }
         self::$request->setData(array_merge($getPost, $jsonData));
     }
 
-    public static function getRequest()
+    public static function getRequest():Request
     {
         return self::$request;
     }
 
-    public static function getResponse()
+    public static function getResponse():Response
     {
         if (!self::$response) {
             self::$response = new Response(self::$request);
-            self::$response->setData(array());
+            self::$response->setData([]);
         }
         return self::$response;
+    }
+
+    public static function abort($code){
+        if (!self::$response) {
+            self::$response = new Response(self::$request);
+            self::$response->setData([]);
+        }
+        self::$response->setData($code);
+        self::$response->setStatus($code);
     }
 
     public static function processResponse()

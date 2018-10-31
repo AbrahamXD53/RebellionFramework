@@ -6,15 +6,15 @@ class Loader
 {
     const UNABLE_TO_LOAD = 'Unable to load class';    
 
-    protected static $dirs = array();
+    protected static $dirs = [];
     protected static $registered = 0;
 
-    public function __construct(array $dirs = array())
+    public function __construct(array $dirs = [])
     {
         self::init($dirs);
     }
 
-    public static function init($dirs = array()){
+    public static function init(array $dirs = []){
         if($dirs){
             self::addDirs($dirs);
         }

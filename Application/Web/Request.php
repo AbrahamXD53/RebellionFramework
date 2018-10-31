@@ -18,7 +18,7 @@ class Request extends AbstractHttp
     public function __construct($uri = null, $method = null, array $headers = null, array $data = null, array $cookies = null)
     {
         if (!$headers) {
-            $this->headers = $_SERVER ?? array();
+            $this->headers = $_SERVER ?? [];
         } else {
             $this->headers = $headers;
         }
@@ -37,13 +37,13 @@ class Request extends AbstractHttp
         }
 
         if (!$data) {
-            $this->data = $_REQUEST ?? array();
+            $this->data = $_REQUEST ?? [];
         } else {
             $this->data = $data;
         }
 
         if (!$cookies) {
-            $this->cookies = $_COOKIE ?? array();
+            $this->cookies = $_COOKIE ?? [];
         } else {
             $this->cookies = $cookies;
         }

@@ -1,16 +1,33 @@
 <?php
 
-$router->filter('auth', function () {
+use Application\Controller\UserController;
+use Application\Router\Router;
+
+Router::filter('auth', function () {
     if (!isset($_SESSION['auth'])) {
-        header("Location: http://localhost/oop/login");
-        die();
+        Router::redirect('login');
     }
 });
 
-$router->group(['before' => 'auth'], function ($router) {
-    $router->get('/', function () {
-        return View::render('index.html', array('title' => 'index', 'content' => json_encode($_SESSION['auth'])));
-    });
+Router::filter('no-auth', function () {
+    if (isset($_SESSION['auth'])) {
+        Router::redirect('/');
+    }
+});
 
-    $router->controller('/', Application\Controller\CustomerController::class);
+Router::group(['before' => 'auth'], function () {
+    Router::get('/', function () {
+        Router::redirect('user/game');
+    });
+    Router::get('/logout', function () {
+        if (isset($_SESSION['auth'])) {
+            $_SESSION['auth'] = null;
+        }
+        Router::redirect('login');
+    });
+    Router::controller('/user', UserController::class);
+});
+
+Router::group(['before' => 'no-auth'], function () {
+    
 });

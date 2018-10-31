@@ -7,7 +7,7 @@ $params = [
     'host' => 'localhost',
     'user' => 'root',
     'pwd' => '',
-    'dbname' => 'php7cookbook',
+    'dbname' => 'rebellion',
 ];
 
 $connection = Connection::getInstance($params);

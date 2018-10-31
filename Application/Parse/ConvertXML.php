@@ -8,11 +8,11 @@ class ConvertXML
 {
     public function xmlToArray(SimpleXMLIterator $xml): array
     {
-        $a = array();
+        $a = [];
 
         for ($xml->rewind(); $xml->valid(); $xml->next()) {
             if (!array_key_exists($xml->key(), $a)) {
-                $a[$xml->key()] = array();
+                $a[$xml->key()] = [];
             }
             if ($xml->hasChildren()) {
                 $a[$xml->key()][] = $this->xmlToArray($xml->current());
